@@ -37,6 +37,22 @@ class ArticlesController extends AppController
         }
         $this->set('article', $article);
     }
+    public function edit($slug)
+    {
+        $article = $this->Articles->findBySlug()->firstOrFail();
+        if ($this->request->is(['post','put']))
+        {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article))
+            {
+                $this->Flash->success(__('The article has been updated successfully.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to complete the update.'));
+        }
+        $this->set('article', $article);
+    }
+
 //    /**
 //     * Index method
 //     *
