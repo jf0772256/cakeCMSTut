@@ -9,4 +9,4 @@
 <h1><?= h($article->title) ?></h1>
 <p><?= h($article->body) ?></p>
 <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
-<p><?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?><span style="margin-left:1rem;"></span><?= $this->Html->link('Back', ['action' => 'index']) ?></p>
+<p><?= $this->Html->link('Back', ['action' => 'index']) ?></p>
