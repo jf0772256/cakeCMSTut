@@ -27,8 +27,15 @@ class ArticlesController extends AppController
         {
             // populate the article
             $article = $this->Articles->patchEntity($article, $this->request->getData());
-
+            $article->user_id = 1; // is temporary (will be made changes to later)
+            if ($this->Articles->save($article))
+            {
+                $this->Flash->success(__("Your article has been created."));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to save your article.'));
         }
+        $this->set('article', $article);
     }
 //    /**
 //     * Index method

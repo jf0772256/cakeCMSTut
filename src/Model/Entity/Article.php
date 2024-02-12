@@ -39,7 +39,7 @@ class Article extends Entity
         'published' => true,
         'created' => true,
         'modified' => true,
-        'user' => true,
-        'tags' => true,
+    //    'user' => true,
+    //    'tags' => true,
     ];
 }
