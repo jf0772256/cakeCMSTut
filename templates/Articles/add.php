@@ -2,6 +2,7 @@
 
 <h1>Create Article</h1>
 
+<?= $this->Html->link('Back', ['action' => 'index']); ?>
 <?php
     echo $this->Form->create($article);
     // is hardcoded until we build auth methods
