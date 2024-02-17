@@ -25,7 +25,7 @@
             {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 // setting this manually to 1 because we dont have the authentication methods in-place yet
-                $article->user = 1;
+                $article->user_id = 1;
                 // we will change that later
 
                 if ($this->Articles->save($article))
