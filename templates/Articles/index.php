@@ -2,6 +2,7 @@
 
 <h1>Articles</h1>
 
+<?= $this->Html->link('Create', ['action' => 'add']); ?>
 <table>
     <tr>
         <th>Title</th>
