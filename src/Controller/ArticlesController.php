@@ -37,4 +37,20 @@
             }
             $this->set('article', $article);
         }
+
+        public function edit($slug = null)
+        {
+            $article = $this->Articles->findBySlug($slug)->firstOrFail();
+            if ($this->request->is(['post','put']))
+            {
+                $this->Articles->patchEntity($article, $this->request->getData());
+                if ($this->Articles->save($article))
+                {
+                    $this->Flash->success('Updates Saved Successfully.');
+                    return $this->redirect(['action' => 'view', $article->slug]);
+                }
+                $this->Flash->error(__('Unable to save edits.'));
+            }
+            $this->set('article', $article);
+        }
 	}
