@@ -35,7 +35,9 @@
                 }
                 $this->Flash->error(__('Unable to save the article.'));
             }
-            $this->set('article', $article);
+            // fetch tags associated with the article and attach them to the view
+            $tags = $this->Articles->Tags->find('list')->all();
+            $this->set(compact('article', 'tags'));
         }
 
         public function edit($slug = null)
@@ -51,7 +53,9 @@
                 }
                 $this->Flash->error(__('Unable to save edits.'));
             }
-            $this->set('article', $article);
+            // fetch tags associated with the article and attach them to the view
+            $tags = $this->Articles->Tags->find('list')->all();
+            $this->set(compact('article', 'tags'));
         }
 
         public function delete($slug)
