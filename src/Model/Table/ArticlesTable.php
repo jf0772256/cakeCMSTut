@@ -3,6 +3,7 @@
 	namespace App\Model\Table;
 
 	use Cake\Event\EventInterface;
+    use Cake\ORM\Query\SelectQuery;
     use Cake\ORM\Table;
     use Cake\Utility\Text;
     use Cake\Validation\Validator;
@@ -33,5 +34,23 @@
                 ->notEmptyString('body')
                 ->minLength('body', 10);
             return $validator;
+        }
+
+        public function findTagged(SelectQuery $query, array $tags = []) : SelectQuery
+        {
+            $columns = [
+                'Articles.id',
+                'Articles.user_id',
+                'Articles.title',
+                'Articles.body',
+                'Articles.published',
+                'Articles.created',
+                'Articles.slug'
+            ];
+            $query = $query->select($columns)->distinct($columns);
+            // simplifying into one line and fewer redundant calls, but is the same as an if else
+            $condition = (empty($tags)) ? ['Tags.title IS' => null] : ['Tags.title IN' => $tags];
+            $query->leftJoinWith('Tags')->where($condition);
+            return $query->groupBy(['Articles.id']);
         }
     }
