@@ -18,6 +18,18 @@
             $this->set(compact('article'));
         }
 
+        /**
+         * Tags method is to handle teh new route that was created in the config/routes for searching using specific tags
+         * @return void
+         */
+        public function tags()
+        {
+            // this should fetch the path parameters that we will use to connect to the tags
+            $tags = $this->request->getParam('pass');
+            $articles = $this->Articles->finc('tagged', tags: $tags)->all();
+            $this->set(compact('articles', 'tags'));
+        }
+
         public function add()
         {
             $article = $this->Articles->newEmptyEntity();
